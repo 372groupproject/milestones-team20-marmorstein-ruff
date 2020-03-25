@@ -1,6 +1,6 @@
 References
 Website: https://www.lua.org/doc/hopl.pdf
-Language reference manual:
-Community:
+Language reference manual: https://www.lua.org/docs.html
+Community: https://www.reddit.com/r/lua/
 Major project: 
 Compiler/Interpreter: https://studio.zerobrane.com
