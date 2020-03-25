@@ -1,7 +1,6 @@
 References
-1. Book:
-2. Website:
-3. Language reference manual:
-4. Community:
-5. Major project: 
-6. Compiler/Interpreter: https://studio.zerobrane.com
+Website: https://www.lua.org/doc/hopl.pdf
+Language reference manual:
+Community:
+Major project: 
+Compiler/Interpreter: https://studio.zerobrane.com
