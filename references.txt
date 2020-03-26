@@ -2,5 +2,6 @@ References
 Website: https://www.lua.org/doc/hopl.pdf
 Language reference manual: https://www.lua.org/docs.html
 Community: https://www.reddit.com/r/lua/
-Major project: 
+Major project: Cheat Engine: https://www.cheatengine.org
+		Cheat Engine Git: https://github.com/cheat-engine/cheat-engine/
 Compiler/Interpreter: https://studio.zerobrane.com
