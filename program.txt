@@ -1,0 +1,4 @@
+Our program is going to implement a game. We're essentially going to do "Space Invaders in Lua", a simple space-invaders style shooter game where the player can move an object that shoots enemy objects. 
+We expect the program to have at least one file, unlikely to have more since the game will be pretty simple. It will implement a player that takes input to move and shoot, enemies that can die (and possibly shoot back?), and bullets that can animate across the screen and kill enemies.
+We expect this program to be approximately 300 - 500 lines of code.
+It will be a good illustration of lua because lua has become most widely used for game development. Lua has some useful built-in GUI tools and its versatility and portability make it excellent for game development, and with the variety of functions in a game there will be ample room to show off many of lua's capabilities. 
