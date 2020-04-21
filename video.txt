@@ -1,0 +1,5 @@
+- General theme: Lua is a versatile scripting language
+- Ideas: An overview of Lua (history, data types and code structures, uses, etc)
+- How we will demo our program: We will take a screen recording of the game we are making
+- We will probably run the gpa calculator code snippets to demo lua's code structures and data types. We may also run the countdown program to demo object-oriented programming in lua. 
+- How we are going to shoot it: We are going to do a voice over of a slide show. We will probably pre-record our presentation and edit it into a video along with screen recordings of code snippets and our demo program
