@@ -8,23 +8,23 @@ end
 
 -- create objects with tables
 -- timer for enemy spawning
-enemyTimerMax = 1
+enemyTimerMax = 0.4
 enemyTimer = enemyTimerMax 
 enemyimg = nil
 enemies = {}
 playerAlive = true
 player = nil
+canShoot = true
+canShootTimerMax = 0.3
+canShootTimer = canShootTimerMax
+bullets = {}
+score = 0
 
 function love.load()
-  --load images
+  bulletImg = love.graphics.newImage('bullet.png')
   bg = love.graphics.newImage("space bg.png")
   enemyimg = love.graphics.newImage("enemy.png")
   player = love.graphics.newImage("spaceship.png")
-  --load audio
-  music = love.audio.newSource("Retro_music.mp3", "stream")
-  loseSound = love.audio.newSource("Lose.wav", "static")
-  music:setLooping(true)
-  music:play()
 end
 
 function love.update(dt)
@@ -54,14 +54,34 @@ function love.update(dt)
   
   end
 
+  canShootTimer = canShootTimer - (1 * dt)
+  if(canShootTimer < 0) then
+    canShoot = true
+  end
+  
+  if(love.mouse.isDown(1)) and canShoot and playerAlive then
+    newBullet = {x= love.mouse.getX() + (player:getWidth()/4), y = 500,img = bulletImg}
+    table.insert(bullets,newBullet)
+    canShoot = false
+    canShootTimer = canShootTimerMax
+  end
+
   --collision detection
   for i, enemy in ipairs(enemies) do
     if(CheckCollision(enemy.x, enemy.y, enemyimg:getWidth(), enemyimg:getHeight(), 
         love.mouse.getX(), 500, player:getWidth(), player:getHeight()) and playerAlive) then
         table.remove(enemies,i)
         playerAlive = false
-        music:stop()
-        loseSound:play()
+    end
+  end
+  
+  for i, enemy in ipairs(enemies) do
+    for j, bullet in ipairs(bullets) do
+      if CheckCollision(enemy.x, enemy.y, enemyimg:getWidth(), enemyimg:getHeight(), bullet.x, bullet.y, bullet.img:getWidth(), bullet.img:getHeight()) then
+        table.remove(bullets, j)
+        table.remove(enemies, i)
+        score = score + 1
+      end
     end
   end
   
@@ -73,8 +93,16 @@ function love.update(dt)
     enemyTimer = enemyTimerMax
     
     playerAlive = true
-    music:play()
   end
+  
+  --bullets
+  for i, bullet in ipairs(bullets) do
+    bullet.y = bullet.y - (350 * dt)
+    if bullet.y < 0 then
+      table.remove(bullets,i)
+    end
+  end
+  
 end
 
 function love.draw(dt)
@@ -85,17 +113,14 @@ function love.draw(dt)
   if playerAlive then
     love.graphics.draw(player, love.mouse.getX(), 500)
   else 
-    love.graphics.print("You died, press 'R' to restart", love.graphics:getWidth()/2-75, love.graphics:getHeight()/2-10)
+    love.graphics.print("You died, press 'R' to restart\n\t\tYour score was: " .. tostring(score), love.graphics:getWidth()/2-75, love.graphics:getHeight()/2-10)
   end
   --enemies
   for i, enemy in ipairs(enemies) do
     love.graphics.draw(enemy.img, enemy.x, enemy.y)
   end
-  
-end
-
-function love.mousepressed(x,y,button)
-  if button == 1 then
-    love.graphics.ellipse("fill",x,y,5,5)
+  --bullets
+  for i, bullet in ipairs(bullets) do
+    love.graphics.draw(bullet.img, bullet.x, bullet.y)
   end
 end
