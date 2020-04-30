@@ -59,7 +59,7 @@ function love.update(dt)
     --remove enemies once they go off screen
     if enemy.y > love.graphics.getHeight() then
       table.remove(enemies, i)
-      if(score > 0) then
+      if(score > 0) and playerAlive then
         score = score - 1
       end
     end 
