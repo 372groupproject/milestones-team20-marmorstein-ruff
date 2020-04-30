@@ -8,7 +8,7 @@ end
 
 -- create objects with tables
 -- timer for enemy spawning
-enemyTimerMax = 0.4
+enemyTimerMax = 1
 enemyTimer = enemyTimerMax 
 enemyimg = nil
 enemies = {}
