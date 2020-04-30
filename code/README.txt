@@ -1,4 +1,3 @@
-Initial README for Lua project
 
 To compile and run Lua on Mac/Linux:
   curl -R -O http://www.lua.org/ftp/lua-5.3.5.tar.gz
