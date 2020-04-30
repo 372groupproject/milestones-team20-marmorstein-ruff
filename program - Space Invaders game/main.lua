@@ -22,6 +22,7 @@ function love.load()
   player = love.graphics.newImage("spaceship.png")
   --load audio
   music = love.audio.newSource("Retro_music.mp3", "stream")
+  loseSound = love.audio.newSource("Lose.wav", "static")
   music:setLooping(true)
   music:play()
 end
@@ -60,6 +61,7 @@ function love.update(dt)
         table.remove(enemies,i)
         playerAlive = false
         music:stop()
+        loseSound:play()
     end
   end
   
