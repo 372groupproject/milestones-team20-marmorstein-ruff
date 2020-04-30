@@ -59,6 +59,9 @@ function love.update(dt)
     --remove enemies once they go off screen
     if enemy.y > love.graphics.getHeight() then
       table.remove(enemies, i)
+      if(score > 0) then
+        score = score - 1
+      end
     end 
   
   end
@@ -139,4 +142,6 @@ function love.draw(dt)
   for i, bullet in ipairs(bullets) do
     love.graphics.draw(bullet.img, bullet.x, bullet.y)
   end
+  --score
+  love.graphics.print("Score: " .. tostring(score),5,5)
 end
