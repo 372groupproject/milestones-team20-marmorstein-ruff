@@ -16,9 +16,14 @@ playerAlive = true
 player = nil
 
 function love.load()
+  --load images
   bg = love.graphics.newImage("space bg.png")
   enemyimg = love.graphics.newImage("enemy.png")
   player = love.graphics.newImage("spaceship.png")
+  --load audio
+  music = love.audio.newSource("Retro_music.mp3", "stream")
+  music:setLooping(true)
+  music:play()
 end
 
 function love.update(dt)
@@ -54,6 +59,7 @@ function love.update(dt)
         love.mouse.getX(), 500, player:getWidth(), player:getHeight()) and playerAlive) then
         table.remove(enemies,i)
         playerAlive = false
+        music:stop()
     end
   end
   
@@ -65,6 +71,7 @@ function love.update(dt)
     enemyTimer = enemyTimerMax
     
     playerAlive = true
+    music:play()
   end
 end
 
