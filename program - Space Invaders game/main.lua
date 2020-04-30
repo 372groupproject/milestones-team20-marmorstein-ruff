@@ -8,7 +8,7 @@ end
 
 -- create objects with tables
 -- timer for enemy spawning
-enemyTimerMax = 0.4
+enemyTimerMax = 1
 enemyTimer = enemyTimerMax 
 enemyimg = nil
 enemies = {}
@@ -25,6 +25,15 @@ function love.load()
   bg = love.graphics.newImage("space bg.png")
   enemyimg = love.graphics.newImage("enemy.png")
   player = love.graphics.newImage("spaceship.png")
+  
+  --load audio
+  music = love.audio.newSource("Retro_music.mp3", "stream")
+  music:setLooping(true)
+  music:play()
+  
+  loseSound = love.audio.newSource("Lose.wav", "static")
+  shootSound = love.audio.newSource("shoot.wav", "static")
+  deathSound = love.audio.newSource("enemy_hit.wav", "static")
 end
 
 function love.update(dt)
@@ -64,14 +73,18 @@ function love.update(dt)
     table.insert(bullets,newBullet)
     canShoot = false
     canShootTimer = canShootTimerMax
+    shootSound:play()
   end
 
   --collision detection
   for i, enemy in ipairs(enemies) do
+    --player death
     if(CheckCollision(enemy.x, enemy.y, enemyimg:getWidth(), enemyimg:getHeight(), 
         love.mouse.getX(), 500, player:getWidth(), player:getHeight()) and playerAlive) then
         table.remove(enemies,i)
         playerAlive = false
+        music:stop()
+        loseSound:play()
     end
   end
   
@@ -80,6 +93,7 @@ function love.update(dt)
       if CheckCollision(enemy.x, enemy.y, enemyimg:getWidth(), enemyimg:getHeight(), bullet.x, bullet.y, bullet.img:getWidth(), bullet.img:getHeight()) then
         table.remove(bullets, j)
         table.remove(enemies, i)
+        deathSound:play()
         score = score + 1
       end
     end
@@ -93,6 +107,8 @@ function love.update(dt)
     enemyTimer = enemyTimerMax
     
     playerAlive = true
+    
+    music:play()
   end
   
   --bullets
